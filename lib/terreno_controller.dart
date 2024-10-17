@@ -1,22 +1,19 @@
-// lib/terreno_controller.dart
-import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:flutter/services.dart' show rootBundle;
 import 'terreno_model.dart';
 
 class TerrenoController {
   Future<List<Terreno>> buscarTerrenos(String query) async {
-    final url = 'https://dev.simpleagri.com/start.php?&PruebaTecnica&obtener_terrenos';
-    final response = await http.get(Uri.parse(url));
+    // Cargar el archivo JSON desde los assets
+    final String response = await rootBundle.loadString('assets/terrenos.json');
+    List<dynamic> data = json.decode(response);
+    
+    // Convertir los datos JSON en una lista de objetos Terreno
+    List<Terreno> terrenos = data.map((item) => Terreno.fromJson(item)).toList();
 
-    if (response.statusCode == 200) {
-      List<dynamic> data = json.decode(response.body);
-      List<Terreno> terrenos = data.map((item) => Terreno.fromJson(item)).toList();
-      
-      return terrenos.where((terreno) {
-        return terreno.nombre.contains(query) || terreno.codigo.contains(query);
-      }).toList();
-    } else {
-      throw Exception('Error al cargar terrenos');
-    }
+    // Filtrar los terrenos según la búsqueda
+    return terrenos.where((terreno) {
+      return terreno.nombre.contains(query) || terreno.codigo.contains(query);
+    }).toList();
   }
 }
