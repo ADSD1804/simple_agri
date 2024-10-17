@@ -1,4 +1,3 @@
-// lib/buscar_terreno_screen.dart
 import 'package:flutter/material.dart';
 import 'terreno_model.dart';
 import 'terreno_controller.dart';
@@ -28,13 +27,13 @@ class _BuscarTerrenoScreenState extends State<BuscarTerrenoScreen> {
                 labelText: 'Buscar por nombre o código',
                 suffixIcon: IconButton(
                   icon: Icon(Icons.search),
-                  onPressed: _buscarTerrenos, // Llama a la función de búsqueda
+                  onPressed: _buscarTerrenos, 
                 ),
               ),
             ),
           ),
           Expanded(
-            child: _buildTerrenoTable(), // Muestra la tabla con los resultados
+            child: _buildTerrenoTable(), 
           ),
         ],
       ),
@@ -71,10 +70,11 @@ class _BuscarTerrenoScreenState extends State<BuscarTerrenoScreen> {
   }
 
   void _buscarTerrenos() async {
-    final query = _searchController.text;
-    final terrenos = await TerrenoController().buscarTerrenos(query);
-    setState(() {
-      _terrenos = terrenos;
-    });
-  }
+  final query = _searchController.text;
+  final terrenos = await TerrenoController().buscarTerrenos(query);
+  
+  setState(() {
+    _terrenos = terrenos; 
+  });
+}
 }

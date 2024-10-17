@@ -1,4 +1,4 @@
-// lib/terreno_model.dart
+
 class Terreno {
   final String nombre;
   final String codigo;

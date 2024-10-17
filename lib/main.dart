@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: BuscarTerrenoScreen(), // Aquí cargamos la pantalla de búsqueda
+      home: BuscarTerrenoScreen(), 
     );
   }
 }
